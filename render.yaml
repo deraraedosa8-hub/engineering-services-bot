@@ -7,3 +7,5 @@ services:
     envVars:
       - key: BOT_TOKEN
         sync: false
+      - key: ADMIN_ID
+        sync: false
