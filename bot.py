@@ -276,7 +276,7 @@ services = {
 
     "ai": {
         "name": "🤖 AI Services",
-        "price": "200 ETB irraa",
+        "price": "200 ETB ",
         "description":
             "• AI writing\n"
             "• Document assistance\n"
@@ -286,7 +286,7 @@ services = {
 
     "design": {
         "name": "🎨 Poster & Design",
-        "price": "350 ETB irraa",
+        "price": "350 ETB ",
         "description":
             "• Business posters\n"
             "• Social media designs\n"
@@ -296,7 +296,7 @@ services = {
 
     "translation": {
         "name": "🌐 Translation",
-        "price": "150 ETB irraa",
+        "price": "150 ETB ",
         "description":
             "• Afaan Oromo ↔ English\n"
             "• Afaan Oromo ↔ Amharic\n"
