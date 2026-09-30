@@ -891,3 +891,33 @@ async def shutdown():
 
     await telegram_app.stop()
     await telegram_app.shutdown()
+# =========================================================
+# REGISTER TELEGRAM HANDLERS
+# =========================================================
+
+telegram_app.add_handler(
+    CommandHandler("start", start)
+)
+
+telegram_app.add_handler(
+    CommandHandler("services", services_command)
+)
+
+telegram_app.add_handler(
+    CommandHandler("orders", orders_command)
+)
+
+telegram_app.add_handler(
+    CommandHandler("order", order_command)
+)
+
+telegram_app.add_handler(
+    CallbackQueryHandler(button_handler)
+)
+
+telegram_app.add_handler(
+    MessageHandler(
+        filters.PHOTO | filters.Document.ALL,
+        receipt_handler
+    )
+)
