@@ -801,16 +801,31 @@ async def receipt_handler(
 
 @app.post("/telegram")
 async def telegram_webhook(request: Request):
-    data = await request.json()
+    try:
+        data = await request.json()
 
-    update = Update.de_json(
-        data,
-        telegram_app.bot
-    )
+        print("Telegram update received")
 
-    await telegram_app.process_update(update)
+        update = Update.de_json(
+            data,
+            telegram_app.bot,
+        )
 
-    return {"ok": True}
+        print(f"Update ID: {update.update_id}")
+
+        await telegram_app.process_update(update)
+
+        print("Telegram update processed successfully")
+
+        return {"ok": True}
+
+    except Exception as e:
+        print(f"TELEGRAM WEBHOOK ERROR: {repr(e)}")
+
+        return {
+            "ok": False,
+            "error": str(e)
+        }
 
 
 # =========================================================
