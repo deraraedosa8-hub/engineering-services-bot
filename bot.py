@@ -795,4 +795,84 @@ async def receipt_handler(
     )
 
 
+# =========================================================# =========================================================
+# TELEGRAM WEBHOOK
 # =========================================================
+
+@app.post("/telegram")
+async def telegram_webhook(request: Request):
+    data = await request.json()
+
+    update = Update.de_json(
+        data,
+        telegram_app.bot
+    )
+
+    await telegram_app.process_update(update)
+
+    return {"ok": True}
+
+
+# =========================================================
+# HEALTH CHECK
+# =========================================================
+
+@app.get("/")
+async def home():
+    return {
+        "status": "Engineering Services Bot is running"
+    }
+
+
+# =========================================================
+# STARTUP
+# =========================================================
+
+@app.on_event("startup")
+async def startup():
+
+    print("Starting Engineering Services Bot...")
+
+    await telegram_app.initialize()
+    await telegram_app.start()
+
+    base_url = os.environ.get("RENDER_EXTERNAL_URL")
+
+    if not base_url:
+        print("ERROR: RENDER_EXTERNAL_URL is missing!")
+        return
+
+    webhook_url = f"{base_url.rstrip('/')}/telegram"
+
+    print(f"Setting Telegram webhook: {webhook_url}")
+
+    await telegram_app.bot.delete_webhook(
+        drop_pending_updates=False
+    )
+
+    await telegram_app.bot.set_webhook(
+        url=webhook_url
+    )
+
+    webhook_info = await telegram_app.bot.get_webhook_info()
+
+    print(f"Webhook URL: {webhook_info.url}")
+    print(
+        f"Pending updates: "
+        f"{webhook_info.pending_update_count}"
+    )
+
+    print("Telegram webhook set successfully!")
+
+
+# =========================================================
+# SHUTDOWN
+# =========================================================
+
+@app.on_event("shutdown")
+async def shutdown():
+
+    print("Stopping Engineering Services Bot...")
+
+    await telegram_app.stop()
+    await telegram_app.shutdown()
