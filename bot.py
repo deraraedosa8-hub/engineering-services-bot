@@ -1476,6 +1476,7 @@ telegram_app.add_handler(
 
 telegram_app.add_handler(
     CommandHandler("order", order_command)
+
 )telegram_app.add_handler(
     CommandHandler("status", status_command)
 )
