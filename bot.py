@@ -537,9 +537,9 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "📄 Professional CV — 800 ETB\n"
             "📝 Cover Letter — 200 ETB\n"
             "💼 Job Application Support — 300 ETB irraa\n"
-            "🤖 AI Services — 200 ETB irraa\n"
-            "🎨 Poster & Design — 350 ETB irraa\n"
-            "🌐 Translation — 150 ETB irraa\n\n👇 Choose a service:",
+            "🤖 AI Services — 200 ETB \n"
+            "🎨 Poster & Design — 350 ETB \n"
+            "🌐 Translation — 150 ETB \n\n👇 Choose a service:",
             reply_markup=main_menu(),
         )
         return
