@@ -130,14 +130,14 @@ def get_latest_user_order(user_id):
 
 
 services = {
-    "surveying": {"name": "📐 Surveying & Engineering", "price": "500 ETB irraa", "description": "• Total Station support\n• Coordinate processing\n• Survey data processing\n• Road construction survey support"},
-    "excel": {"name": "📊 Excel / KML / Coordinate", "price": "300 ETB irraa", "description": "• Excel data processing\n• KML / KMZ preparation\n• Coordinate conversion\n• Survey data formatting"},
+    "surveying": {"name": "📐 Surveying & Engineering", "price": "500 ETB ", "description": "• Total Station support\n• Coordinate processing\n• Survey data processing\n• Road construction survey support"},
+    "excel": {"name": "📊 Excel / KML / Coordinate", "price": "300 ETB ", "description": "• Excel data processing\n• KML / KMZ preparation\n• Coordinate conversion\n• Survey data formatting"},
     "cv": {"name": "📄 Professional CV", "price": "800 ETB", "description": "• Professional CV writing\n• International-style CV\n• Job-focused formatting\n• PDF-ready document"},
     "cover": {"name": "📝 Cover Letter", "price": "200 ETB", "description": "• Professional cover letter\n• Job-specific application\n• Clear and professional writing"},
-    "job_support": {"name": "💼 Job Application Support", "price": "300 ETB irraa", "description": "• Job application assistance\n• CV & Cover Letter review\n• Job-specific application support\n• Professional application guidance"},
-    "ai": {"name": "🤖 AI Services", "price": "200 ETB irraa", "description": "• AI writing\n• Document assistance\n• AI-generated content\n• Professional text improvement"},
-    "design": {"name": "🎨 Poster & Design", "price": "350 ETB irraa", "description": "• Business posters\n• Social media designs\n• Promotional graphics\n• Digital designs"},
-    "translation": {"name": "🌐 Translation", "price": "150 ETB irraa", "description": "• Afaan Oromo ↔ English\n• Afaan Oromo ↔ Amharic\n• English ↔ Amharic"},
+    "job_support": {"name": "💼 Job Application Support", "price": "300 ETB ", "description": "• Job application assistance\n• CV & Cover Letter review\n• Job-specific application support\n• Professional application guidance"},
+    "ai": {"name": "🤖 AI Services", "price": "200 ETB ", "description": "• AI writing\n• Document assistance\n• AI-generated content\n• Professional text improvement"},
+    "design": {"name": "🎨 Poster & Design", "price": "350 ETB ", "description": "• Business posters\n• Social media designs\n• Promotional graphics\n• Digital designs"},
+    "translation": {"name": "🌐 Translation", "price": "150 ETB ", "description": "• Afaan Oromo ↔ English\n• Afaan Oromo ↔ Amharic\n• English ↔ Amharic"},
 }
 
 payment_info = {
@@ -211,7 +211,7 @@ def cv_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton("📄 Professional CV — 800 ETB", callback_data="service_cv")],
         [InlineKeyboardButton("📝 Cover Letter — 200 ETB", callback_data="service_cover")],
-        [InlineKeyboardButton("💼 Job Application Support — 300 ETB irraa", callback_data="service_job_support")],
+        [InlineKeyboardButton("💼 Job Application Support — 300 ETB ", callback_data="service_job_support")],
         [InlineKeyboardButton("🏠 Main Menu", callback_data="menu")],
     ])
 
@@ -252,11 +252,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def services_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "🛠 Our Services\n\n"
-        "📐 Surveying & Engineering — 500 ETB irraa\n"
-        "📊 Excel / KML / Coordinate — 300 ETB irraa\n"
+        "📐 Surveying & Engineering — 500 ETB \n"
+        "📊 Excel / KML / Coordinate — 300 ETB \n"
         "📄 Professional CV — 800 ETB\n"
-        "📝 Cover Letter — 200 ETB\n"
-        "💼 Job Application Support — 300 ETB irraa\n"
+        "📝 Cover Letter — 200 ETB \n"
+        "💼 Job Application Support — 300 ETB \n"
         "🤖 AI Services — 200 ETB \n"
         "🎨 Poster & Design — 350 ETB \n"
         "🌐 Translation — 150 ETB \n\n👇 Choose a service:",
