@@ -1334,7 +1334,73 @@ async def orders_command(
             f"📅 {order['created_at']}\n\n"
         )
 
-    await update.message.reply_text(text)
+    await update.message.reply_text(text)# =========================================================
+# CUSTOMER ORDER STATUS
+# =========================================================
+
+async def status_command(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE,
+):
+    user_id = update.effective_user.id
+
+    # Specific order: /status ORD-00001
+    if context.args:
+        order_id = context.args[0].strip().upper()
+        order = get_order(order_id)
+
+        if not order:
+            await update.message.reply_text(
+                "❌ Order not found.\n\n"
+                "Example:\n"
+                "/status ORD-00001"
+            )
+            return
+
+        # Customer can only see their own order
+        if order["user_id"] != user_id and user_id != ADMIN_ID:
+            await update.message.reply_text(
+                "⛔ You are not authorized to view this order."
+            )
+            return
+
+    else:
+        # If no ID is given, show customer's latest order
+        conn = get_db()
+
+        order = conn.execute(
+            """
+            SELECT * FROM orders
+            WHERE user_id = ?
+            ORDER BY id DESC
+            LIMIT 1
+            """,
+            (user_id,),
+        ).fetchone()
+
+        conn.close()
+
+        if not order:
+            await update.message.reply_text(
+                "📦 You don't have any orders yet.\n\n"
+                "Use /start to create a new order."
+            )
+            return
+
+    await update.message.reply_text(
+        "📦 <b>ORDER STATUS</b>\n\n"
+        f"🆔 <b>Order ID:</b> <code>{order['order_id']}</code>\n"
+        f"🛠 <b>Service:</b> {order['service_name']}\n"
+        f"💰 <b>Price:</b> {order['price']}\n"
+        f"💳 <b>Payment:</b> "
+        f"{order['payment_method'] or 'Not selected'}\n"
+        f"📌 <b>Status:</b> {order['status']}\n"
+        f"📎 <b>File:</b> "
+        f"{'Attached' if order['file_id'] else 'No file'}\n"
+        f"📅 <b>Created:</b> {order['created_at']}\n"
+        f"🔄 <b>Updated:</b> {order['updated_at']}",
+        parse_mode="HTML",
+    ) 
 
 
 # =========================================================
@@ -1410,6 +1476,8 @@ telegram_app.add_handler(
 
 telegram_app.add_handler(
     CommandHandler("order", order_command)
+)telegram_app.add_handler(
+    CommandHandler("status", status_command)
 )
 
 # Admin approval/rejection and all other callbacks
