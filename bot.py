@@ -222,7 +222,7 @@ def cv_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton("📄 Professional CV — 800 ETB", callback_data="service_cv")],
         [InlineKeyboardButton("📝 Cover Letter — 200 ETB", callback_data="service_cover")],
-        [InlineKeyboardButton("💼 Job Application Support — 300 ETB irraa", callback_data="service_job_support")],
+        [InlineKeyboardButton("💼 Job Application Support — 300 ETB ", callback_data="service_job_support")],
         [InlineKeyboardButton("🏠 Main Menu", callback_data="menu")],
     ])
 
@@ -658,11 +658,11 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data.clear()
         await query.edit_message_text(
             "🛠 Our Services\n\n"
-            "📐 Surveying & Engineering — 500 ETB irraa\n"
-            "📊 Excel / KML / Coordinate — 300 ETB irraa\n"
+            "📐 Surveying & Engineering — 500 ETB \n"
+            "📊 Excel / KML / Coordinate — 300 ETB \n"
             "📄 Professional CV — 800 ETB\n"
             "📝 Cover Letter — 200 ETB\n"
-            "💼 Job Application Support — 300 ETB irraa\n"
+            "💼 Job Application Support — 300 ETB \n"
             "🤖 AI Services — 200 ETB \n"
             "🎨 Poster & Design — 350 ETB \n"
             "🌐 Translation — 150 ETB \n\n👇 Choose a service:",
